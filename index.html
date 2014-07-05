@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SoundCloud Randomizer</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<link rel="stylesheet" type="text/css" href="pure-min.css">
+	<script src="jquery.min.js"></script>	
+</head>
+<body>
+<header>
+
+</header>
+<div class="container">
+<main roll="main" id="playlist-app">
+
+	<form id="playlist-form" class="pure-form">
+	<div class="">
+        <input type="text" id="search" name="search" placeholder="Search.." class="pure-input-1-2 hidden" >
+    
+        
+	    <select name="genre-select" class="controls"  id="genre-select">
+            <option value="">Genre</option>
+	        <option value="alternative">Alternative Rock</option>
+            <option value="ambient">Ambient</option>
+            <option value="classical">Classical</option>
+            <option value="country">Country</option>
+            <option value="dance">Dance</option>
+            <option value="deephouse">Deep House</option>
+            <option value="disco">Disco</option>
+            <option value="dnb">Drum & Bass</option>
+            <option value="dubstep">Dubstep</option>
+            <option value="electro">Electro</option>
+            <option value="electronic">Electronic</option>
+            <option value="folk">Folk</option>
+            <option value="hip-hop">HipHop</option>
+            <option value="house">House</option>
+            <option value="indierock">Indie Rock</option>
+            <option value="jazz">Jazz</option>
+            <option value="latin">Latin</option>
+            <option value="metal">Metal</option>
+            <option value="minimal-techno">Minimal Techno</option>
+            <option value="piano">Piano</option>
+            <option value="pop">Pop</option>
+            <option value="progressive-house">Progressive House</option>
+            <option value="punk">Punk</option>
+            <option value="rap">Rap</option>
+            <option value="reggae">Reggae</option>
+            <option value="rock">Rock</option>
+            <option value="singer-songwriter">Singer-Songwriter</option>
+            <option value="soul">Soul</option>
+            <option value="tech-house">Tech House</option>
+            <option value="techno">Techno</option>
+            <option value="trans">Trance</option>
+            <option value="trap">Trap</option>
+            <option value="trip-hop">TripHop</option>
+            <option value="world">World</option>
+	    </select>
+        
+       <input type="text" id="tags" name="tags" placeholder="tags: 80s, Kanye, glitch" class="pure-input-1-3 controls">
+	   
+    
+    
+        <label for="type-select hidden" class="hidden">Type:</label>
+        <select name="type-select hidden" class="hidden" id="type-select">
+            <option></option>
+            <option>original</option>
+            <option>remix</option>
+            <option>live</option>
+            <option>recording</option>
+            <option>spoken</option>
+            <option>podcast</option>
+            <option>demo</option>
+            <option>in progress</option>
+            <option>stem</option>
+            <option>loop</option>
+            <option>sound effect</option>
+            <option>sample</option>
+            <option>other</option>
+        </select>
+        <br>
+
+
+	   <input type="number" id="bpm-select-min" placeholder="Min BPM" name="bpm" min="50" max="299" step="5" value="" class="hidden">
+	
+	   <label for="bpm-select-max hidden"></label>
+	   <input type="number" class="controls" id="bpm-select-max" placeholder="Max BPM" name="bpm" min="51" max="300" step="5" value="" >
+   
+            <select name="durationMin-select" class="controls" id="durationMin-select">
+            <option value="30000">Length</option>
+            <option value="30000">30s</option>
+            <option value="60000">1 min</option>
+            <option value="240000">4 min</option>
+            <option value="600000">10 min</option>
+            <option value="900000">20 min</option>
+            <option value="1200000">30 min</option>
+        </select>
+  
+        <select name="durationMax-select" id="durationMax-select" class="hidden">
+            <option value="">MaxLength</option>
+            <option value="60000">1 min</option>
+            <option value="120000">2 min</option>
+            <option value="300000">5 min</option>
+            <option value="600000">10 min</option>
+            <option value="1200000">30 min</option>
+            <option value="2400000">1 h</option>
+        </select>
+
+	   <select name="license-select" id="license-select" class="hidden">
+            <option></option>
+            <option>cc-by</option>
+            <option>cc-by-nc</option>
+            <option>cc-by-nd</option>
+            <option>cc-by-sa</option>
+            <option>cc-by-nc-nd</option>
+            <option>cc-by-nc-sa</option>
+	   </select>
+		
+        <br><br>
+	</div>
+	   <button class="pure-button pure-button-primary" type="submit" id="get-list">Play Random Song</button>
+       <span class="data-loading" id="loading"></span>
+       <button class="pure-button" id="controltoggle3">X</button>
+       <button class="pure-button" id="controltoggle2">Advanced</button>
+       <button class="pure-button" id="controltoggle">+</button>
+    </form>
+<br>
+<div class="tracks">
+    <div id="target"></div>
+        <ol id="track-list">
+<script id="playlist-template" type="text/template">
+
+    <li id="track-item">
+       <p><%= track_url %></p>
+	</li>
+
+</script>
+        </ul>
+</div>
+
+</div>
+</main>
+</div> 
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+
+$('.controls').hide();
+$('.hidden').hide();
+
+	$("#controltoggle").click(function(e) {
+		e.preventDefault();
+		
+		$(".controls").show();
+		$(this).hide();
+		$("#controltoggle2").show();
+		$("#controltoggle3").show();
+		console.log("controltoggle pressed");
+	});
+
+	$("#controltoggle3").click(function(e) {
+		e.preventDefault();
+		$(".controls").hide();
+		$(this).hide();
+		$("#controltoggle").show();
+		$("#controltoggle2").hide();
+		$(".hidden").hide();
+	});
+
+	$("#controltoggle2").click(function(e) {
+		e.preventDefault();
+		$(".hidden").show();
+		$(this).hide();		
+	});
+	
+});
+
+</script>
+
+
+<script src="sdk.js"></script>
+<script src="underscore-min.js"></script>
+
+<script src="backbone-min.js"></script>
+<script src="backbone.localStorage-min.js"></script>
+
+
+<script src="playlist-model.js"></script>
+<script src="playlist-collection.js"></script>
+<script src="playlist-view.js"></script>
+<script src="app-view.js"></script>
+
+</body>
+</html>
