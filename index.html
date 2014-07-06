@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SndCld Rndmzr</title>
+	<title>Sndcld Rndmzr</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="description" content="SndCld Rndmzr is a programing experiment using Backbone.js and the Soundcloud API">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -12,15 +12,15 @@
 <header>
 
 </header>
+
 <div class="container">
+	<p>Sndcld Rndmzr</p>
 <main roll="main" id="playlist-app">
 
-	<form id="playlist-form" class="pure-form">
-	<div class="">
-        <input type="text" id="search" name="search" placeholder="Search.." class="pure-input-1-2 hidden" >
-    
-        
-	    <select name="genre-select" class="controls"  id="genre-select">
+	<form id="playlist-form" class="pure-form pure-form-stacked">
+	
+	<div class="pure-u-1-4">
+	    <select name="genre-select" class="controls pure-u-2-4"  id="genre-select">
             <option value="">Genre</option>
 	        <option value="alternative">Alternative Rock</option>
             <option value="ambient">Ambient</option>
@@ -57,12 +57,45 @@
             <option value="trip-hop">TripHop</option>
             <option value="world">World</option>
 	    </select>
-        
-       <input type="text" id="tags" name="tags" placeholder="tags: 80s, Kanye, glitch" class="pure-input-1-3 controls">
-	   
+	    </div>
+	    <div class="pure-u-1-4"> 
+       <input type="text" id="tags" name="tags" placeholder="tags: 80s, Kanye, glitch" class="pure-input-1 controls">
+       </div> 
+    <div class="pure-u-1-4">
+	   <label for="bpm-select-max hidden"></label>
+	   <input type="number" class="pure-input-1 controls" id="bpm-select-max" placeholder="Max BPM" name="bpm" min="51" max="300" step="5" value="" >
+	   </div>
+	<div class="pure-u-1-4">
+	   <input type="number" class="pure-input-1 hidden" id="bpm-select-min" placeholder="Min BPM" name="bpm" min="50" max="299" step="5" value="" class="hidden">
+	   </div>
+	   <div class="pure-u-1-4">
+            <select name="durationMin-select" class="controls" id="durationMin-select">
+            <option value="30000">MinLength</option>
+            <option value="30000">30s</option>
+            <option value="60000">1 min</option>
+            <option value="240000">4 min</option>
+            <option value="600000">10 min</option>
+            <option value="900000">20 min</option>
+            <option value="1200000">30 min</option>
+        </select>
+	</div>
+	<div class="pure-u-1-4">
+        <select name="durationMax-select" id="durationMax-select" class="hidden">
+            <option value="">MaxLength</option>
+            <option value="60000">1 min</option>
+            <option value="120000">2 min</option>
+            <option value="300000">5 min</option>
+            <option value="600000">10 min</option>
+            <option value="1200000">30 min</option>
+            <option value="2400000">1 h</option>
+        </select>
+	</div>
+
+	<div class="pure-u-1-4">
+        <input type="text" id="search" name="search" placeholder="Search.." class="pure-input-1 hidden" >
+	</div>
     
-    
-        <label for="type-select hidden" class="hidden">Type:</label>
+       <div class="pure-u-1-4"> 
         <select name="type-select hidden" class="hidden" id="type-select">
             <option></option>
             <option>original</option>
@@ -80,33 +113,10 @@
             <option>other</option>
         </select>
         <br>
-
-
-	   <input type="number" id="bpm-select-min" placeholder="Min BPM" name="bpm" min="50" max="299" step="5" value="" class="hidden">
+	</div>
 	
-	   <label for="bpm-select-max hidden"></label>
-	   <input type="number" class="controls" id="bpm-select-max" placeholder="Max BPM" name="bpm" min="51" max="300" step="5" value="" >
-   
-            <select name="durationMin-select" class="controls" id="durationMin-select">
-            <option value="30000">Length</option>
-            <option value="30000">30s</option>
-            <option value="60000">1 min</option>
-            <option value="240000">4 min</option>
-            <option value="600000">10 min</option>
-            <option value="900000">20 min</option>
-            <option value="1200000">30 min</option>
-        </select>
-  
-        <select name="durationMax-select" id="durationMax-select" class="hidden">
-            <option value="">MaxLength</option>
-            <option value="60000">1 min</option>
-            <option value="120000">2 min</option>
-            <option value="300000">5 min</option>
-            <option value="600000">10 min</option>
-            <option value="1200000">30 min</option>
-            <option value="2400000">1 h</option>
-        </select>
-
+	  
+	<div class="pure-u-1-4">
 	   <select name="license-select" id="license-select" class="hidden">
             <option></option>
             <option>cc-by</option>
@@ -116,9 +126,9 @@
             <option>cc-by-nc-nd</option>
             <option>cc-by-nc-sa</option>
 	   </select>
-		
+	   </div>
         <br><br>
-	</div>
+
 	   <button class="pure-button pure-button-primary" type="submit" id="get-list">Play Random Song</button>
        <span class="data-loading" id="loading"></span>
        <button class="pure-button" id="controltoggle3">X</button>
@@ -128,6 +138,11 @@
 <br>
 <div class="tracks">
     <div id="target"></div>
+
+    <div style="" class="me">
+	<p>Created by <a href="https://malekyala.com">Malek from Chicago</a></p>
+	    </div>
+
         <ol id="track-list">
 <script id="playlist-template" type="text/template">
 
