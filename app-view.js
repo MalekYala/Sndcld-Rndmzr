@@ -4,7 +4,7 @@ PlaylistApp.AppView = Backbone.View.extend({
 
 	//boundaries of app
 	el: $('#playlist-app'),
-	//event click listener 
+	//event click listener
 	events: {
 		'click #get-list' : 'create_list'
 	},
@@ -25,8 +25,8 @@ PlaylistApp.AppView = Backbone.View.extend({
 		this.$track_list = $('#track-list');
 		this.$loading = $('#loading');
 		this.$target = $('#target');
-		
-		//auth with soundcloud api on initalize	
+
+		//auth with soundcloud api on initalize
 		SC.initialize({
 	  		client_id: 'a1d2786bf7396bf6d6ad9049a28150d6'
 		});
@@ -47,7 +47,7 @@ PlaylistApp.AppView = Backbone.View.extend({
     this.$el.append(trackView.render().el);
 
     },
-  
+
 
 	create_list: function(e) {
 		e.preventDefault();
@@ -65,44 +65,48 @@ PlaylistApp.AppView = Backbone.View.extend({
 		};
 
 		//PlaylistApp.Playlist.create(playlist_values);
-	
-		var randomOffset = Math.floor(Math.random() * 7999);
+
+		var randomOffset = Math.floor(Math.random() * 100);
 
 		//print selected values
-		console.log(playlist_values);	
+		console.log(playlist_values);
 
-		//get track objects according to selected values  	  
+		//get track objects according to selected values
 		SC.get('/tracks', { limit: 50,
 			offset: randomOffset,
-			 q: playlist_values.search, 
-		 	 type_select: playlist_values.type_select, 
-		 	 bpm: { from: playlist_values.bpmMin, to: playlist_values.bpmMax }, 
-			 duration: {from:playlist_values.durationMin, to:playlist_values.durationMax}, 
-		     genres: playlist_values.genre, 
-		  	 tags: playlist_values.tag_list, 
+			 q: playlist_values.search,
+		 	 type_select: playlist_values.type_select,
+		 	 bpm: { from: playlist_values.bpmMin, to: playlist_values.bpmMax },
+			 duration: {from:playlist_values.durationMin, to:playlist_values.durationMax},
+		     genres: playlist_values.genre,
+		  	 tags: playlist_values.tag_list,
 		  	 order: playlist_values.order,
 		   	 license: playlist_values.license }, function(tracks, error) {
 
 		     //random number between 0 and 199
 		   	 var random = Math.floor(Math.random() * 49);
 		   	 console.log('track ' + random + ' of 50');
-		   	 console.log('offset ' + randomOffset + ' of 8000');
-		   	 //select random track url between 0 and 299 
-		   	
+		   	 console.log('offset ' + randomOffset + ' of '+ random + '');
+			 if (tracks[random] == undefined) {
+			 $('#message').text('Rethink you options and try again.').addClass('errorMessage').slideDown(200);
+		 	 $('#extcontrols input')[0].reset();
+			 }
+		   	 //select random track url between 0 and 299
 		     var track_url = tracks[random].permalink_url;
-		 	 
+		     //if error display alert message
+
+		     if (track_url == null || track_url == undefined || track_url.length == 0) {console.log('Please Refine Your Search'); }
+			 else{
 
 		     console.log('now playing: ' + track_url);
-			 if (track_url == null || track_url == undefined || track_url.length == 0) {alert('Please Refine Your Search'); }
-			 else{
-		      //embed track widget to target div	
+			$('#message').text('Sndcld Rndmzr' ).removeClass('errorMessage');
+
+		      //embed track widget to target div
 		      SC.oEmbed(track_url, {auto_play: true, show_comments:"false", iframe:true},
-		        document.getElementById("target")) 
+		        document.getElementById("target"))
 		  	}
-		  	
-		  	 //if error display alert message
-		     if (error) { alert('Please Refine Your Search'); }
-		      
+
+
 		 });
 
 	},
