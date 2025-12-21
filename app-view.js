@@ -28,7 +28,7 @@ PlaylistApp.AppView = Backbone.View.extend({
 
 		//auth with soundcloud api on initalize
 		SC.initialize({
-	  		client_id: 'a1d2786bf7396bf6d6ad9049a28150d6'
+	  		client_id: 'iZIs9mchVcX5lhVRyQGGAYlNPVldzAoJ'
 		});
 
 		//this.collection.on('sync', this.render, this);
@@ -101,9 +101,12 @@ PlaylistApp.AppView = Backbone.View.extend({
 		     console.log('now playing: ' + track_url);
 			$('#message').text('Sndcld Rndmzr' ).removeClass('errorMessage');
 
-		      //embed track widget to target div
-		      SC.oEmbed(track_url, {auto_play: true, show_comments:"false", iframe:true},
-		        document.getElementById("target"))
+		      //embed track widget to target div - using iframe widget instead of deprecated oEmbed
+		      var widgetUrl = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(track_url) + 
+		                      '&auto_play=true&show_comments=false&visual=true';
+		      var iframe = '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" ' +
+		                   'src="' + widgetUrl + '"></iframe>';
+		      document.getElementById("target").innerHTML = iframe;
 		  	}
 
 
