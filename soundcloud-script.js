@@ -24,7 +24,7 @@ App.Models.Track = Backbone.Model.extend();
 
 App.Collections.Tracks = Backbone.Collection.extend({
   model: App.Models.Track,
-  url: 'http://api.soundcloud.com/tracks'
+  url: 'https://api.soundcloud.com/tracks'
 });
 
 App.Views.Tracks = Backbone.View.extend({
@@ -72,7 +72,7 @@ var tracks = new App.Collections.Tracks();
 tracks.fetch({
   data: {
     format: 'json',
-    client_id: 'a1d2786bf7396bf6d6ad9049a28150d6',
+    client_id: 'iZIs9mchVcX5lhVRyQGGAYlNPVldzAoJ',
     q: $search.val(),
     type_select: $type_select.val(), 
     genres: $genera_select.val(),
