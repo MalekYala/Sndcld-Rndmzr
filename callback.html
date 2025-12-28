@@ -1,9 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Connect with SoundCloud</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>SoundCloud OAuth Callback</title>
   </head>
-  <body onload="window.opener.setTimeout(window.opener.SC.connectCallback, 1)">
-    <b style="width: 100%; text-align: center;">This popup should automatically close in a few seconds</b>
+  <body>
+    <p>Connecting to SoundCloud...</p>
+    <script>
+      // OAuth redirect stub.
+      // When full OAuth is wired up this page receives the authorization code
+      // from SoundCloud and passes it back to the opener window.
+      if (window.opener && window.opener.SC) {
+        window.opener.SC.connectCallback();
+      }
+      setTimeout(function () { window.close(); }, 1);
+    </script>
   </body>
 </html>
