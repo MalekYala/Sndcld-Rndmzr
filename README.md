@@ -18,13 +18,13 @@ This application uses:
 - SoundCloud API v2 with a valid client ID
 - HTTPS endpoints for secure communication
 - SoundCloud's widget player for reliable playback
-- Backbone.js for application structure
+- React for application structure
 
 ## Development
 Simply open `index.html` in a modern web browser. No build process required - this is a static web application.
 
 ## Technologies
-- Backbone.js for MVC structure
+- React for component structure
 - jQuery for DOM manipulation
 - SoundCloud API for track discovery
 - Pure CSS for styling
