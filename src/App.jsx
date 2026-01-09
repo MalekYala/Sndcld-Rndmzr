@@ -7,6 +7,7 @@ import History from './components/History.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
 import { useRecentTracks } from './hooks/useRecentTracks.js'
 import { searchLongMixes } from './lib/soundcloud.js'
+import { initVisualizer } from './visualizer.js'
 
 export default function App() {
   const [genre, setGenre] = useState('')
@@ -18,6 +19,10 @@ export default function App() {
 
   // recentIds we use for filtering — resets when pool exhausted
   const recentIdsRef = useRef(entries.map((e) => e.id))
+
+  useEffect(() => {
+    initVisualizer()
+  }, [])
 
   useEffect(() => {
     recentIdsRef.current = entries.map((e) => e.id)

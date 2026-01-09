@@ -51,6 +51,28 @@ html, body {
   z-index: 1;
 }
 
+/* Background visualizer */
+#visualizer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  filter: blur(0.4px);
+}
+
+[data-theme="light"] #visualizer {
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #visualizer { display: none; }
+}
+
 /* Container */
 .container {
   width: 100%;

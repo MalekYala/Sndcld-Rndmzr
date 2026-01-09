@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { bindToSoundCloudWidget } from '../visualizer.js'
 import { formatDuration } from '../lib/soundcloud.js'
 
 export default function Widget({ track }) {
@@ -12,7 +13,11 @@ export default function Widget({ track }) {
     `&visual=${isMobile ? 'false' : 'true'}`
 
   useEffect(() => {
-    // nothing to bind yet — visualizer added later
+    // wait one tick so SC.Widget can find the iframe
+    const t = setTimeout(() => {
+      if (iframeRef.current) bindToSoundCloudWidget(iframeRef.current)
+    }, 0)
+    return () => clearTimeout(t)
   }, [track.id])
 
   return (
