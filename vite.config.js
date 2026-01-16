@@ -7,9 +7,9 @@ import { cpSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export default defineConfig({
-  // For GitHub Pages deploys at https://<user>.github.io/sndcld-Rndmzr/.
+  // For GitHub Pages deploys at https://<user>.github.io/Sndcld-Rndmzr/.
   // Override at build time: BASE_PATH=/ for root deploys (custom domain or user/org pages).
-  base: process.env.BASE_PATH ?? '/sndcld-Rndmzr/',
+  base: process.env.BASE_PATH ?? '/Sndcld-Rndmzr/',
   plugins: [
     react(),
     {
