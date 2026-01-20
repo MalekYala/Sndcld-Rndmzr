@@ -1,4 +1,4 @@
-export const SOUNDCLOUD_CLIENT_ID = 'RF8yvumNwWwVg0aX4r7fHqzIVAtO6nSI';
+export const SOUNDCLOUD_CLIENT_ID = import.meta.env.VITE_SOUNDCLOUD_CLIENT_ID ?? '';
 
 export const SC_API_V2 = 'https://api-v2.soundcloud.com';
 
