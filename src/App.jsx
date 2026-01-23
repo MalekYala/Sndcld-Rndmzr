@@ -86,7 +86,7 @@ export default function App() {
             onShuffle={handleShuffle}
             shuffleDisabled={!genre || loading}
           />
-          {currentTrack && <Widget track={currentTrack} />}
+          {currentTrack && <Widget track={currentTrack} onFinish={handleNext} />}
           <Status message={status.message} type={status.type} />
           {currentTrack && (
             <button className="btn btn--next" id="next-btn" onClick={handleNext}>

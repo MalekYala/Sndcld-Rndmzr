@@ -139,14 +139,17 @@ export function initVisualizer() {
 
 // Hook a SoundCloud widget iframe — must run AFTER the iframe is in DOM
 // AND after w.soundcloud.com/player/api.js has loaded.
-export function bindToSoundCloudWidget(iframeEl) {
-  if (PRM || !iframeEl || !window.SC || !window.SC.Widget) return;
+export function bindToSoundCloudWidget(iframeEl, opts = {}) {
+  if (!iframeEl || !window.SC || !window.SC.Widget) return;
   const widget = window.SC.Widget(iframeEl);
   const Events = window.SC.Widget.Events;
 
-  widget.bind(Events.PLAY,  () => { intensityTarget = 1; });
-  widget.bind(Events.PAUSE, () => { intensityTarget = IDLE_INTENSITY; });
-  widget.bind(Events.FINISH, () => { intensityTarget = IDLE_INTENSITY; });
+  widget.bind(Events.PLAY,  () => { if (!PRM) intensityTarget = 1; });
+  widget.bind(Events.PAUSE, () => { if (!PRM) intensityTarget = IDLE_INTENSITY; });
+  widget.bind(Events.FINISH, () => {
+    if (!PRM) intensityTarget = IDLE_INTENSITY;
+    if (typeof opts.onFinish === 'function') opts.onFinish();
+  });
   widget.bind(Events.PLAY_PROGRESS, (e) => {
     // Use position delta as a subtle modulation — long mixes still feel alive
     const newPos = e.currentPosition || 0;
