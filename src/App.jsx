@@ -95,7 +95,7 @@ export default function App() {
           )}
           <History entries={entries} onPick={handleHistoryPick} />
           <footer className="footer">
-            <p>Powered by <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a></p>
+            <p>Created by Malek <a href="https://malekyala.com" target="_blank" rel="noopener">from Chicago</a> &middot; Powered by <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a></p>
           </footer>
         </div>
       </div>
